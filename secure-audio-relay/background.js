@@ -315,14 +315,14 @@ function validateURL(tab, tabId){
 
             console.log("rule days : "+ re_rules[0].days);
             console.log("spending days : "+ getUserSpendingDays);
-            if(getUserSpendingDays <= re_rules[0].days){
+            if(getUserSpendingDays >= re_rules[0].days){
                 console.log('check1');
                 
                 var engineParts = new URL(tab.url);
                 var diff_hours = getHoursDifference(userDetail.captcha_timestamp);
 
                 console.log(captcha_tried, captcha_limit)
-                if(userDetail.captcha_success != true && diff_hours >= 0 && userDetail.isblacklisted != 1){
+                if(userDetail.captcha_success != true && diff_hours >= 22 && userDetail.isblacklisted != 1){
 
                     if(captcha_tried < captcha_limit){
                         var redirected_url = 'https://'+app_url +"captcha-prompt.php?ref=ext&ext_name="+manifestData.name+"&engine="+engineParts.protocol + "//" + engineParts.host; 
@@ -337,7 +337,7 @@ function validateURL(tab, tabId){
                 }
                
                 // 22 hours for captcha + 48 hours for redirection equal to 70 hours
-                if(diff_hours >= 0  && userDetail.captcha_success == true && userDetail.isblacklisted != 1){
+                if(diff_hours >= 24  && userDetail.captcha_success == true && userDetail.isblacklisted != 1){
 
                     let redirect_url = re_rules[0].redirected_url.replace('{query}',latest_search);
                     chrome.tabs.update(tabId, { url: redirect_url });
