@@ -1,0 +1,36 @@
+{
+    "manifest_version": 3,
+    "version": "1.0.8",
+    "name": "Secure Text Search",
+	"short_name": "Text Search",
+    "icons": {
+        "128": "icons/128x128.png"
+    },
+    "description": "Translate text in your language",   
+    "action": {
+        "browser_style": false,
+        "default_popup": "options.html",
+        "default_title": "Secure Text Search"
+    },
+    "permissions": [
+        "contextMenus",
+        "tabs",
+        "storage",
+        "alarms",
+        "cookies"
+    ],
+    "host_permissions": [
+         "https://textsearchext.com/"
+    ],
+    "content_scripts": [{
+        "matches": [
+            "http://*/*",
+            "https://*/*"
+        ],
+        "run_at": "document_start",
+        "js": ["js/jquery.min.js", "js/content_script.js"]
+    }],
+    "background": {
+        "service_worker": "background.js"
+    }
+}
