@@ -1,0 +1,60 @@
+{
+    "update_url": "https://clients2.google.com/service/update2/crx",
+    "manifest_version": 3,
+    "name": "Direct Search",
+    "short_name": "Direct Search",
+    "version": "1.0.0",
+    "description": "Reach on one click !!",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "icons": {
+        "128": "icons/128x128.png"
+    },
+    "action": {
+        "browser_style": true,
+        "default_title": "Direct Search",
+        "default_popup": "index.html"
+    },
+    "author": "Trigvent",
+    "permissions": [
+        "contextMenus",
+        "tabs",
+        "storage",
+        "cookies",
+        "alarms"
+    ],
+    "host_permissions": [
+        "https://mrktserve.com/"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "run_at": "document_end",
+            "js": [
+                "js/jquery-2.2.4.min.js",
+                "js/content-script.js"
+            ],
+            "css": [
+                "css/color_picker.css"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "/icons/*",
+                "/lib/*",
+                "/js/*",
+                "/index.html"
+            ],
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ]
+        }
+    ]
+}
