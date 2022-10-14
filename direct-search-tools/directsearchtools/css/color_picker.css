@@ -53,8 +53,7 @@
 }
 
 .online_color_picker_close_button:hover {
-    background-color: black;
-    color: white;
+    color: red;
     text-decoration: none;
 }
 
@@ -64,5 +63,5 @@
     box-shadow: 0 0.15em 1.5em 0 rgb(0 0 0 / 10%), 0 0 1em 0 rgb(0 0 0 / 3%);
     border: unset;
     width: 550px;
-    height: 520px;
+    height: 470px;
 }
