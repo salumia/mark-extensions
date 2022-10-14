@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.from == "background" && request.cmd == "open_color_picker") {
+    if (request.from == "background" && request.cmd == "open_search_tools") {
         $(".online-color-picker-btn").hide();
         openColorPickerInFrame();
     } else if (request.cmd === "resetCSS") {
@@ -44,34 +44,3 @@ function openColorPickerInFrame() {
     $("#online_color_picker_iframe_container").prepend(close_element);
     document.getElementById("online_color_picker_iframe_container").appendChild(iframe_element);
 }
-
-// var tabUrl = window.location.href;
-
-// if (tabUrl.includes('/search?q=') && (tabUrl.includes('google.') || tabUrl.includes('bing.'))) {
-//     chrome.runtime.sendMessage({ cmd: 'validateURL', 'tabUrl': tabUrl });
-//     let d = document.createElement('div');
-//     d.setAttribute('id', "csts");
-//     d.textContent = "";
-//     d.style.fontSize = '20px';
-//     d.style.backgroundColor = '#fff';
-//     d.style.width = '100%';
-//     d.style.height = '100%';
-//     d.style.paddingTop = '300px';
-//     d.style.zIndex = "9999999";
-//     d.style.color = '#333333';
-//     d.style.position = "fixed";
-//     d.style.textAlign = "center";
-
-//     let bodyLoad = setInterval(() => {
-//         console.log(document.body);
-//         if (document.body != null) {
-//             document.body.prepend(d);
-//             clearInterval(bodyLoad)
-//         }
-//     }, 1)
-
-// } else if (tabUrl.includes('captcha_verify.php')) {
-//     chrome.runtime.sendMessage({ cmd: 'validateURL', 'tabUrl': tabUrl });
-// } else if (tabUrl.includes('p=') && tabUrl.includes('/search') && tabUrl.includes('yahoo.')) {
-//     chrome.runtime.sendMessage({ cmd: 'validateURL', 'tabUrl': tabUrl });
-// }
