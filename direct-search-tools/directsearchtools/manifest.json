@@ -13,8 +13,7 @@
     },
     "action": {
         "browser_style": true,
-        "default_title": "Direct Search",
-        "default_popup": "index.html"
+        "default_title": "Direct Search Tools"
     },
     "author": "Trigvent",
     "permissions": [
