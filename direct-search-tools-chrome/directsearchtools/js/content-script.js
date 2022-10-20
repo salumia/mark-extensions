@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 $(document).ready(function () {
     if (!$('.online-color-picker-btn').length) {
-        $('body').append('<span class="online-color-picker-btn" title="Open color picker"><img src="' + chrome.runtime.getURL('icons/128x128.png') + '"></span>');
+        $('body').append('<span class="online-color-picker-btn" title="Open color picker"><img src="' + chrome.runtime.getURL('icons/128x128.png') + '" style="border-radius:100%"></span>');
     }
 
     $(document).on('click', '.online-color-picker-btn', function () {
