@@ -1,0 +1,17 @@
+.secure_audio_stop_button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999999999999;
+    background: #f5f5f5;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.speak_image {
+    display: block;
+    margin: 0 auto;
+    width: 64px;
+    cursor: pointer;
+}

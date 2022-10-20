@@ -1,0 +1,58 @@
+body{
+	height: auto;
+}
+.tabs{
+	width: 400px;
+	border: unset;
+}
+
+.list-group-item {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#chrome-rating-heading{ margin: 10px 0; }
+#chrome-rating-desc{ margin: 0 0 10px 0 }
+
+.footer p{
+    font-size: 12px;
+    color: #606060;
+    margin: 0;
+    padding: 0;
+    display: block;
+    font-weight: 500;
+}
+.screens{ display:none; }
+.dashboard-screen{ display:inline-block; }
+.settings-row{
+	padding:10px;
+}
+
+.settings-row div{
+	font-weight:600;
+	margin-right:10px;
+}
+
+.navigation a{
+	color: #000 !important;
+	margin-right: 10px;
+}
+.navigation{
+	padding: 20px;
+    font-size: 25px;
+}
+
+.checkbox-slider input[type="checkbox"]:focus + *:before, .checkbox-slider--default input[type="checkbox"]:focus + *:before, .checkbox-slider--a-rounded input[type="checkbox"]:focus + *:before, .checkbox-slider--a input[type="checkbox"]:focus + *:before, .checkbox-slider--b input[type="checkbox"]:focus + *:before, .checkbox-slider--b-flat input[type="checkbox"]:focus + *:before, .checkbox-slider--c input[type="checkbox"]:focus + *:before, .checkbox-slider--c-weight input[type="checkbox"]:focus + *:before, .checkbox-toggle input[type="checkbox"]:focus + *:before {
+	outline: none; 
+}
+.list-group-item {
+    margin-bottom: 3px;
+}
+
+.bg-pink{
+	background-color: #00a4ff !important;
+	border-color: #00a4ff !important;
+}
+#download-screenshot{
+	display: none;
+}

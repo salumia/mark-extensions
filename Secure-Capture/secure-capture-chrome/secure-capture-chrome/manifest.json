@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Secure Capture",
+  "short_name": "Secure Capture",
+  "version": "1.0.0",
+  "description": "Capture a screenshot of your current page entirely and reliably—without requesting any extra permissions!",
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "icons": {
+    "128": "icons/128.png"
+  },
+  "action": {
+    "browser_style": false,
+    "default_title": "Secure Capture",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "downloads",
+    "storage",
+    "alarms",
+    "cookies"
+  ],
+  "host_permissions": [
+       "https://securescreencapture.com/"
+  ],
+  "content_scripts": [{
+    "matches": [
+      "http://*/*",
+      "https://*/*"
+    ],
+    "js": ["lib/jquery/jquery-3.4.1.min.js", "js/content_script.js"]
+  }]
+}
