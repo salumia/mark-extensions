@@ -48,7 +48,7 @@ const app_url = "directsearchtools.com/";
 
 var manifestData = chrome.runtime.getManifest();
 
-var BROWSER_NAME = "Chrome";
+var BROWSER_NAME = "Edge";
 /*************/
 
 var base_api_url = "https://directsearchtools.com/api/request.php?action=";
